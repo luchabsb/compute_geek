@@ -10,21 +10,38 @@ const HeaderComponent = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
+
+    const [textSearch ,setTextSeacrch ] = useState('')
+    
+    const handleSearch = (e) => {
+        console.log(e.target.value)
+    }
+
     return (
         <div id="section">
             <div className="header1 po-relative">
                 <Container>
                     <Navbar className="navbar-expand-lg h1-nav">
-                        <NavbarBrand href="#"><img src={logo} alt="wrapkit" /></NavbarBrand>
-                        <NavbarToggler onClick={toggle}><span className="ti-menu"></span></NavbarToggler>
+                        <NavbarBrand href="#"><img src={logo} style={{ width: '90px' }} alt="wrapkit" /></NavbarBrand>
+                        <form role="form" style={{width: '30%', display: 'flex', alignItems: 'center'}} id="top-buscar">
+                            <input type="hidden" name="buscar" value="1" />
+                            <input type="text" name="palabra" className="search-form form-control p-1" autoComplete="off"   onChange={handleSearch} id="palabra" placeholder="¿Qué producto estás buscando?"  style={{flexGrow: 1}} />
+                            <button className="btn btn-buscartop p-1"  type="submit" style={{marginLeft: '10px', border:'1px solid yellow'}}>
+                                <i className="fa fa-search" style={{color:'yellow', }}></i>
+                            </button>
+                        </form>
+
+
+                        <NavbarToggler style={{color:'yellow'}} onClick={toggle}><span className="ti-menu"></span></NavbarToggler>
                         <Collapse isOpen={isOpen} navbar id="header1">
                             <Nav navbar className="ms-auto mt-2 mt-lg-0">
+                               
                                 <NavItem className="active">
                                     <NavLink>
                                         <Link className="nav-link" to={"/"}>
                                             Productos
                                         </Link>
-                                    </NavLink>                               
+                                    </NavLink>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink>

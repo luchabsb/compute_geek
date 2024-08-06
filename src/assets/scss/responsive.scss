@@ -28,6 +28,14 @@ File: scss
  Small Desktop & above all (1024px) 
  ============================================================== */ 
 
+
+ @media (max-width: 767px) {
+    .header-banner {
+        display: none!important;
+    }
+}
+
+
 @media(min-width:1024px) {
     .contact4 {
         .contact-box {

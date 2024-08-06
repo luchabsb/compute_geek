@@ -10,6 +10,7 @@ import Footer from "../../components/footer/footer.jsx";
 import Novedades from "../../components/news/Novedades.jsx";
 
 import { getNews } from "../../slices/products.js"
+import GridProducts from "../custom-components/sections/gridProducts.jsx";
 
 const Components = () => {
 
@@ -23,16 +24,18 @@ const Components = () => {
 
     return (
         <div id="main-wrapper">
-            <div className="page-wrapper">
-                <div className="container-fluid">
-                    <HeaderBanner />
+            <div className="page-wrapper header-banner" style={{height:'350px'}} >
+                <div className="container-fluid" >
+                    <HeaderBanner  />
                 </div>
             </div>
-            <div className="page-wrapper">
+            <div className="page-wrapper" >
                 {
-                    Object.keys(news).length > 0 &&
+                 /*   Object.keys(news).length > 0 &&
                         <Novedades newsData={news} />
+                */
                 }
+                <GridProducts />
             </div>
         </div>
     );
