@@ -5,44 +5,16 @@ import { Row, Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownI
 import logo from '../../../assets/images/logos/green-logo.png';
 import logo2 from '../../../assets/images/logos/white-logo.png';
 import { Link } from 'react-router-dom';
+import InputSearch from '../../../components/inputSearch/inputSearch';
+import NavCategories from '../../../components/categories/NavCategories';
 
 const HeaderComponent = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
 
-    const [textSearch ,setTextSeacrch ] = useState('')
+   
     
-    const handleSearch = (e) => {
-
-        const url = 'http://localhost:3003/api/products/find/filter';
-
-        console.log(e.target.value)
-
-        const dataSearch = {
-            filter:e.target.value
-        }
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' // Especifica que el cuerpo de la petición está en formato JSON
-            },
-            body: JSON.stringify(dataSearch) // Convierte los datos a formato JSON antes de enviarlos
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error en la petición');
-            }
-            return response.json(); // Convierte la respuesta en un objeto JSON
-        })
-        .then(data => {
-            console.log('Respuesta del servidor:', data); // Maneja los datos recibidos del servidor
-        })
-        .catch(error => {
-            console.error('Hubo un problema con la petición Fetch:', error);
-        });
-    }
-
 
 
     return (
@@ -51,19 +23,13 @@ const HeaderComponent = () => {
                 <Container>
                     <Navbar className="navbar-expand-lg h1-nav">
                         <NavbarBrand href="#"><img src={logo} style={{ width: '90px' }} className='logo' alt="wrapkit" /></NavbarBrand>
-                        <form className='input-search' role="form" style={{width: '40%', display: 'flex', alignItems: 'center'}} id="top-buscar">
-                            <input type="hidden" name="buscar" value="1" />
-                            <input type="text" name="palabra" className="search-form form-control p-1" autoComplete="off"   onChange={handleSearch} id="palabra" placeholder="¿Qué estás buscando?"  style={{flexGrow: 1}} />
-                            <button className="btn btn-buscartop p-1"  type="submit" style={{marginLeft: '10px' }}>
-                                <i className="fa fa-search" style={{color:'yellow', }}></i>
-                            </button>
-                        </form>
+                         <InputSearch />
 
 
-                        <NavbarToggler style={{color:'yellow'}} onClick={toggle}><span className="ti-menu"></span></NavbarToggler>
+                        <NavbarToggler style={{ color: 'yellow' }} onClick={toggle}><span className="ti-menu"></span></NavbarToggler>
                         <Collapse isOpen={isOpen} navbar id="header1">
                             <Nav navbar className="ms-auto mt-2 mt-lg-0">
-                               
+
                                 <NavItem className="active">
                                     <NavLink>
                                         <Link className="nav-link" to={"/"}>
@@ -93,19 +59,21 @@ const HeaderComponent = () => {
                                         <DropdownItem>One more separated link</DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown> */}
-                                <NavItem style={{ marginTop: '7px' }}>
-                                    <Link to={"/signin"} className='btn btn-outline-success'>
+                                <NavItem style={{ marginTop: '15px' }}>
+                                    <Link to={"/signin"} className='btn btn-outline-success p-1'>
                                         Iniciar sesión
                                     </Link>
                                 </NavItem>
-                                <NavItem style={{ marginTop: '7px' }}>
-                                    <Link to={"/signup"} className='btn btn-success'>
+                                <NavItem style={{ marginTop: '15px' }}>
+                                    <Link to={"/signup"} className='btn btn-success p-1'>
                                         Registrate
                                     </Link>
                                 </NavItem>
                             </Nav>
                         </Collapse>
+
                     </Navbar>
+                    <NavCategories />
                 </Container>
             </div>
             {/* <div className="header1 po-relative bg-dark">

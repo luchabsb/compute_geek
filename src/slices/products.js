@@ -22,6 +22,12 @@ const slice = createSlice({
       state.news = news;
       state.productsError = {}
     },
+    getProductsFilter(state,action){
+      const products = action.payload;
+      state.products = products;
+      state.news = products;
+      state.productsError = {}
+    },
     changeLoading(state, action) {
       const loading = action.payload;
       state.loading = loading;
@@ -34,6 +40,27 @@ const slice = createSlice({
 });
 
 export const reducer = slice.reducer;
+
+
+export const getProductsFilter = (value) => async (dispatch) => {
+  dispatch(slice.actions.changeLoading(true));
+  try {
+    const response = await axios.post("/api/products/find/filter", value);
+
+    console.log("products slice ", response.data);
+    dispatch(slice.actions.getProducts(response.data));
+    dispatch(slice.actions.getNews(response.data));
+    dispatch(slice.actions.changeLoading(false));
+  } catch (err) {
+    console.log("error slice ", err);
+    const response = {
+      message: "get products error ",
+    };
+
+    dispatch(slice.actions.handleErrors(response));
+    dispatch(slice.actions.changeLoading(false));
+  }
+};
 
 export const getProducts = () => async (dispatch) => {
   dispatch(slice.actions.changeLoading(true))
